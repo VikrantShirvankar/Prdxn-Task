@@ -16,6 +16,9 @@ class App extends React.Component {
     this.setState({html: event.target.value});
   };
   render(){
+    // const json = require('json-loader!./data.json');
+    const json = require('./data.json');
+    console.log('json', json);
     return (
       <div className="App py-5">
         <div>
