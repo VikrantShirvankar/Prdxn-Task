@@ -9,12 +9,21 @@ export default class ContentEditable extends React.Component {
   shouldComponentUpdate(nextProps){
     return nextProps.html !== ReactDOM.findDOMNode(this).innerHTML;
   }
-  emitChange(){
+  emitChange(e){
     const html =  ReactDOM.findDOMNode(this).innerHTML;
-    const { onChange, id } = this.props;
-    console.log('html_test', html);
-    onChange(id, html);
-
+    const { field, id, tag } = this.props;
+    let myData = localStorage.getItem('myData');
+    if(myData) {
+      myData = JSON.parse(myData);
+      const index = myData.findIndex((data) => data.business_id === id);
+      let data = null;
+      if(tag) {
+        data = [...myData.slice(0, index), { ...myData[index], [tag]: {...myData[index][tag], [field]: html} }, ...myData.slice(index + 1)];
+      } else {
+        data = [...myData.slice(0, index), { ...myData[index], [field]: html }, ...myData.slice(index + 1)];
+      }
+      localStorage.setItem('myData', JSON.stringify(data));
+    }
   }
   render(){
     return (

@@ -14,7 +14,6 @@ class App extends React.Component {
       sortOrder: 'asc'
     };
 
-    this.handleChange = this.handleChange.bind(this);
     this.onPageChange = this.onPageChange.bind(this);
     this.onSort = this.onSort.bind(this);
 
@@ -32,18 +31,11 @@ class App extends React.Component {
     const { limit } = this.state;
     if(myData) {
       myData = JSON.parse(myData).sort((a, b) => b.name > a.name ? -1 : 1);
+      localStorage.setItem('myData', JSON.stringify(myData));
       const totalPages = Math.ceil(myData.length / limit);
       this.setState({ list: myData.slice(0, limit), totalPages });
     }
   }
-
-  handleChange = (id, value) => {
-    let myData = localStorage.getItem('myData');
-    if(myData) {
-      myData = JSON.parse(myData);
-    }
-    console.log('event.target.value', value, id);
-  };
 
   onPageChange(e) {
     e.preventDefault();
@@ -93,7 +85,7 @@ class App extends React.Component {
     const { list, totalPages, page, sortOrder } = this.state;
     return (
       <div className="App p-5">
-        {list ? <Listing list={list} handleChange={this.handleChange} onSort={() => this.onSort} sort={sortOrder} /> : 'No Data Found' }
+        {list ? <Listing list={list} onSort={() => this.onSort} sort={sortOrder} /> : 'No Data Found' }
         {list && totalPages ? <Pagination onPageChange={this.onPageChange} page={page} totalPages={totalPages} /> : ''}
       </div>
     );

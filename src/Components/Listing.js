@@ -8,7 +8,7 @@ import React from 'react';
 import Editable from "../Containers/Editable";
 
 export function Listing(props) {
-  const { list, handleChange, onSort, sort } = props;
+  const { list, onSort, sort } = props;
   return (
     <div className="table-responsive">
       <table className="table table-bordered table-sm">
@@ -31,15 +31,15 @@ export function Listing(props) {
         {
           list.map(data => (
             <tr key={data.business_id}>
-              <td><Editable html={data.name} id={data.business_id} onChange={handleChange} /></td>
-              <td><Editable html={data.address || '-'} onChange={handleChange} /></td>
-              <td>{ data.city}</td>
-              <td>{ data.state}</td>
-              <td>{ data.postal_code}</td>
-              <td>{ data.stars}</td>
-              <td>{ data.attributes && data.attributes.GoodForKids ? data.attributes.GoodForKids : '-' }</td>
-              <td>{ data.hours && data.hours.Monday ? data.hours.Monday : '-'  }</td>
-              <td>{ data.hours && data.hours.Tuesday ? data.hours.Tuesday : '-'  }</td>
+              <td><Editable field={`name`} html={data.name} id={data.business_id} /></td>
+              <td><Editable field={`address`} id={data.business_id} html={data.address || '-'} /></td>
+              <td><Editable field={`city`} id={data.business_id} html={data.city} /></td>
+              <td><Editable field={`state`} id={data.business_id} html={data.state} /></td>
+              <td><Editable field={`postal_code`} id={data.business_id} html={data.postal_code} /></td>
+              <td><Editable field={`stars`} id={data.business_id} html={data.stars} /></td>
+              <td><Editable tag={`attributes`} field={`GoodForKids`} id={data.business_id} html={data.attributes && data.attributes.GoodForKids ? data.attributes.GoodForKids : '-'} /></td>
+              <td><Editable tag={`hours`} field={`Monday`} id={data.business_id} html={data.hours && data.hours.Monday ? data.hours.Monday : '-'  } /></td>
+              <td><Editable tag={`hours`} field={`Tuesday`} id={data.business_id} html={data.hours && data.hours.Tuesday ? data.hours.Tuesday : '-'  } /></td>
             </tr>
           ))
         }
