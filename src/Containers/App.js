@@ -37,8 +37,12 @@ class App extends React.Component {
     }
   }
 
-  handleChange = (event) => {
-    this.setState({html: event.target.value});
+  handleChange = (id, value) => {
+    let myData = localStorage.getItem('myData');
+    if(myData) {
+      myData = JSON.parse(myData);
+    }
+    console.log('event.target.value', value, id);
   };
 
   onPageChange(e) {

@@ -31,7 +31,7 @@ export function Listing(props) {
         {
           list.map(data => (
             <tr key={data.business_id}>
-              <td><Editable html={data.name} onChange={handleChange} /></td>
+              <td><Editable html={data.name} id={data.business_id} onChange={handleChange} /></td>
               <td><Editable html={data.address || '-'} onChange={handleChange} /></td>
               <td>{ data.city}</td>
               <td>{ data.state}</td>
