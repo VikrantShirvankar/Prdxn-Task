@@ -14,7 +14,7 @@ export function Listing(props) {
       <table className="table table-bordered table-sm">
         <thead style={{ backgroundColor: '#fdf3ea' }}>
         <tr>
-          <th className="cursor-pointer" onClick={onSort('name')}>
+          <th onClick={onSort('name')} style={{ cursor: 'pointer' }}>
             Name <i className={`fa fa-arrow-${sort === 'asc' ? 'down': 'up'}`} aria-hidden="true" />
           </th>
           <th>Address</th>
