@@ -8,7 +8,7 @@ import React from 'react';
 import Editable from "../Containers/Editable";
 
 export function Listing(props) {
-  const { list, onSort, sort } = props;
+  const { list, onSort, sort, onDelete } = props;
   return (
     <div className="table-responsive">
       <table className="table table-bordered table-sm">
@@ -25,6 +25,7 @@ export function Listing(props) {
           <th>Good For Kids</th>
           <th>Hours/Monday</th>
           <th>Hours/Tuesday</th>
+          <th> </th>
         </tr>
         </thead>
         <tbody>
@@ -40,6 +41,7 @@ export function Listing(props) {
               <td><Editable tag={`attributes`} field={`GoodForKids`} id={data.business_id} html={data.attributes && data.attributes.GoodForKids ? data.attributes.GoodForKids : '-'} /></td>
               <td><Editable tag={`hours`} field={`Monday`} id={data.business_id} html={data.hours && data.hours.Monday ? data.hours.Monday : '-'  } /></td>
               <td><Editable tag={`hours`} field={`Tuesday`} id={data.business_id} html={data.hours && data.hours.Tuesday ? data.hours.Tuesday : '-'  } /></td>
+              <td><span onClick={() => onDelete(data.business_id)}> <i style={{ fontSize: 20, cursor: 'pointer' }} className="fa fa-trash" aria-hidden="true"/> </span></td>
             </tr>
           ))
         }

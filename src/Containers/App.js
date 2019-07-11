@@ -16,6 +16,7 @@ class App extends React.Component {
 
     this.onPageChange = this.onPageChange.bind(this);
     this.onSort = this.onSort.bind(this);
+    this.onDelete = this.onDelete.bind(this);
 
   }
 
@@ -81,11 +82,22 @@ class App extends React.Component {
     this.setState({ list: myData.slice(firstIndex, lastIndex), sortOrder: order });
 
   }
+  onDelete(id) {
+    const { limit, page } = this.state;
+    if(window.confirm("Are you sure ?")) {
+      let myData = JSON.parse(localStorage.getItem('myData'));
+      myData = myData.filter(d => d.business_id !== id);
+      localStorage.setItem('myData', JSON.stringify(myData));
+      const lastIndex = limit * page;
+      const firstIndex = lastIndex - limit;
+      this.setState({ list: myData.slice(firstIndex, lastIndex)});
+    }
+  }
   render(){
     const { list, totalPages, page, sortOrder } = this.state;
     return (
       <div className="App p-5">
-        {list ? <Listing list={list} onSort={() => this.onSort} sort={sortOrder} /> : 'No Data Found' }
+        {list ? <Listing list={list} onSort={() => this.onSort} sort={sortOrder} onDelete={this.onDelete} /> : 'No Data Found' }
         {list && totalPages ? <Pagination onPageChange={this.onPageChange} page={page} totalPages={totalPages} /> : ''}
       </div>
     );
