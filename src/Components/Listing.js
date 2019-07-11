@@ -8,13 +8,15 @@ import React from 'react';
 import Editable from "../Containers/Editable";
 
 export function Listing(props) {
-  const { list, handleChange } = props;
+  const { list, handleChange, onSort, sort } = props;
   return (
     <div className="table-responsive">
       <table className="table table-bordered table-sm">
         <thead style={{ backgroundColor: '#fdf3ea' }}>
         <tr>
-          <th>Name</th>
+          <th className="cursor-pointer" onClick={onSort('name')}>
+            Name <i className={`fa fa-arrow-${sort === 'asc' ? 'down': 'up'}`} aria-hidden="true" />
+          </th>
           <th>Address</th>
           <th>City</th>
           <th>State</th>
